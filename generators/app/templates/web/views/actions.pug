@@ -1,0 +1,25 @@
+script(src='/javascripts/actions.js')
+div.panel.panel-default
+    div.panel-heading 
+        h3 Actions
+    div.panel-body
+        div.panel.panel-default
+            div.panel-heading
+                h4 Actions for 'user' role
+            div.panel-body
+                form#formAddItem(method='POST' action='/item')
+                    input(name='_csrf', type='hidden', value = csrfToken)
+                    div.form-group
+                        label(for='txtTitle') Title:
+                            input#txtTitle.form-control(type='text', placeholder='Enter title for new item ...' name='txtTitle' value='')
+                    button.btn.btn-primary(type='submit') Add item
+        div.panel.panel-default
+            div.panel-heading
+                h4 Actions for 'admin' role
+            div.panel-body
+                form#formDeleteItem
+                    input(name='_csrf', type='hidden', value = csrfToken)
+                    div.form-group
+                        label(for='txtItemId') Item Id:
+                            input#txtItemId.form-control(type='text', placeholder='Enter the id of the item to be deleted ...' name='txtItemId')
+                    button#buttonDeleteItem.btn.btn-primary(type='button') Delete item

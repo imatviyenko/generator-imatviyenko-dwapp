@@ -1,0 +1,16 @@
+div.panel.panel-default
+    div.panel-heading 
+        h3 Current user
+    div.panel-body
+        div
+            span 
+                strong User display name: 
+            span= userInfo.displayName
+        div
+            span 
+                strong Email:
+            span= userInfo.email
+        div
+            span 
+                strong Roles:
+            span= userInfo.roles.join(';')

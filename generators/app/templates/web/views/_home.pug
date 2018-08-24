@@ -1,0 +1,36 @@
+extends layout
+
+block content
+
+  div(class='row')
+
+    div(class='col-sm-6')
+      block userInfo
+        <% if (authenticationScheme === 'saml') { %>
+        if userInfo
+          include userInfo
+        <% } %>
+
+
+      block items
+        include items
+
+    div(class='col-sm-6')  
+      block actions
+        <% if (authenticationScheme === 'saml') { %>
+        if userInfo.roles.indexOf('user') > -1
+          include actions
+        <% } else { %>
+        include actions
+        <% } %>  
+
+    
+
+
+
+    
+
+    
+
+  
+

@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Ivan Matviyenko",
+      "authorEmail": "ivan.matviyenko@gmail.com",
+      "authorUrl": "https://medium.com/@ivan.matviyenko"
+    }
+  }
+}

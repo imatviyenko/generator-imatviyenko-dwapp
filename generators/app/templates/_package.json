@@ -1,0 +1,47 @@
+{
+  "name": "<%= projectName %>",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node ./index.js",
+    <% if (isWindows) { %>
+    "deploy":
+      "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./scripts/deploy.ps1",
+    "secrets:deploy":
+      "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./scripts/deploy-secrets.ps1",
+    "config:deploy":
+      "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./scripts/deploy-config.ps1"
+    <% } else { %>
+    "deploy":
+      "/bin/sh ./scripts/deploy.sh",
+    "secrets:deploy":
+      "/bin/sh ./scripts/deploy-secrets.sh",
+    "config:deploy":
+      "/bin/sh ./scripts/deploy-config.sh"
+    <% } %>
+  },
+  "dependencies": {
+    "cls-hooked": "^4.2.2",
+    "cls-redis-patch": "0.0.1",
+    "connect-redis": "^3.3.3",
+    "cookie-parser": "~1.4.3",
+    "express": "~4.16.0",
+    "express-session": "^1.15.6",
+    "pug": "2.0.0-beta11",
+    "helmet": "^3.12.1",
+    "csurf": "^1.9.0",
+    "http-errors": "~1.6.2",
+    "serialize-error": "^2.1.0",
+    "moment": "^2.22.2",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-wsfed-saml2": "^3.0.10",
+    "uuid": "^3.2.1",
+    "winston": "^3.0.0-rc3",
+    "readline-sync": "^1.4.9"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}

@@ -1,0 +1,3 @@
+generators/app/templates/_package.json
+generators/app/templates/_app.js
+generators/app/templates/web/routes/_index.js

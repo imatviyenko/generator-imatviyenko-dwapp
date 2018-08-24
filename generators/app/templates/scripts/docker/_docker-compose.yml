@@ -1,0 +1,62 @@
+version: "3.6"
+services:
+  web:
+    image: <%= dockerRegistryPath %>/<%= projectName %>_web
+    secrets:
+      - source: <%= projectName %>_sslcert.cert
+        target: sslcert.cert
+      - source: <%= projectName %>_sslcert.key
+        target: sslcert.key
+      - source: <%= projectName %>_sessionIdHmacSecret
+        target: sessionIdHmacSecret
+    configs:
+      - source: <%= projectName %>_config
+        target: /run/config.json
+    deploy:
+      replicas: <%= instanceCount %>
+      <% if (instanceCount == 1) { %>
+      placement:
+        constraints: [node.role == manager]
+      <% } %>
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "<%= tcpPort %>:3000"
+    networks:
+      - <%= projectName %>_net
+      <% if (sessionStorage === 'swarmRedis') { %>
+      - redis_net
+      <% } %>
+    environment:
+      - TZ=<%= timeZone %>
+    <% if (enableALA) { %>
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "tcp://127.0.0.1:25225"
+        tag: oms.api.applogging
+    <% } %>
+networks:
+  <%= projectName %>_net:
+  <% if (sessionStorage === 'swarmRedis') { %>
+  redis_net:
+    external:
+      name: redis_net
+  <% } %>       
+secrets:
+  <%= projectName %>_sslcert.cert:
+    external: true
+
+  <%= projectName %>_sslcert.key: 
+    external: true
+  
+  <%= projectName %>_sessionIdHmacSecret:
+    external: true
+
+configs:
+  <%= projectName %>_config:
+    external: true    

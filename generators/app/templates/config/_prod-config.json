@@ -1,0 +1,17 @@
+{
+    "session": {
+        "cookieTtl": 600000
+    },    
+    "swarmRedis": {
+        "host": "redis-proxy",
+        "port": 6379,
+        "ttl": 600
+    },
+    <% if (authenticationScheme === 'saml') { %>
+    "saml": {
+        "realm": "<%= samlRealm %>",
+        "identityProviderUrl": "<%= samlIdentityProviderUrl %>",
+        "thumbprint": "<%= samlIdentityProviderCertThumbprint %>"
+    }
+    <% } %>
+}
